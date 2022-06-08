@@ -19,7 +19,7 @@
 .headerList{
     display: flex;
     gap: 40px;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
 }
 
 .headerListItem{
@@ -28,7 +28,7 @@
     gap: 10px;
 }
 
-.headerListItem:active{
+.headerListItem.active{
     border: 1px solid white;
     padding: 10px;
     border-radius:20px ;
