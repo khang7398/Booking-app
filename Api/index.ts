@@ -6,6 +6,7 @@ import authRoute from "./routes/auth"
 import hotelRoute from "./routes/hotels"
 import userRoute from "./routes/users"
 import roomRoute from "./routes/rooms"
+import cors from 'cors'
 const app = express()
 
 dotenv.config()
@@ -25,6 +26,7 @@ mongoose.connection.on("disconnected", ()=>{
 
 app.use(express.json())
 app.use(cookiParser())
+app.use(cors())
 
 app.use("/api/auth", authRoute)
 app.use("/api/hotels", hotelRoute)

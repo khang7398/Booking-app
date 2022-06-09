@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import { createRoom, deleteRoom, findAllRoom, findRoom, updateRoom } from '../controller/room';
+import { createRoom, deleteRoom,  findAllRoom, findRoom, updateRoom } from '../controller/room';
 import { verifyAdmin } from '../utils/verifyToken';
 
 

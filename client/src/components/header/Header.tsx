@@ -6,7 +6,7 @@ import {DateRange} from "react-date-range"
 import { format } from "date-fns";
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
-import { Link, useNavigate } from "react-router-dom";
+import {   Link, useNavigate } from "react-router-dom";
 
 const Header = ({type}: any) =>{
     const [destination, setDestination] = useState("")
@@ -40,9 +40,9 @@ const Header = ({type}: any) =>{
     }
     return(
         <div className="header">
-            <div className={type ==="list" ? "headerContainer lisMode" : "headerContainer"}>
-                <div className="headerList">
-                    <div className="headerListItem active">
+            <div className={type ==="list" ? "headerContainer lisMode" : "headerContainer" }>
+                <div className="headerList" >
+                    <div className="headerListItem active" >
                     <FontAwesomeIcon icon={faBed} />
                     <span>Stays</span>
                     </div>

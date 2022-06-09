@@ -44,6 +44,7 @@ export const deleteRoom = async (req: express.Request, res: express.Response, ne
     }
 }
 
+
 export const findRoom = async (req: express.Request, res: express.Response, next: express.NextFunction) =>{
     try{
         const room = await Room.findById(req.params.id)

@@ -1,14 +1,19 @@
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons"
+import {  faCircleArrowLeft, faCircleArrowRight, faCircleXmark, faLocationDot } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import "../hotel/hotel.css"
 import Footer from "../../components/footer/Footer"
 import Header from "../../components/header/Header"
 import MailList from "../../components/mailList/mailList"
 import Navbar from "../../components/navbar/Navbar"
+import { useState } from "react"
+
 
 
 
 const Hotel = () =>{
+
+    const[slideNumber, setSlideNumber]= useState(0)
+    const[open, setOpen]= useState(false)
 
     const photos = [
         {
@@ -37,12 +42,43 @@ const Hotel = () =>{
 
 
     ]
+
+    const handleOpen = (i: any) => {
+        setSlideNumber(i)
+        setOpen(true)
+    }
+
+
+    const handleMove = (direction: any) =>{
+        let newSliderNumber
+
+        if(direction == "left"){
+            newSliderNumber = slideNumber === 0 ? 5 : slideNumber - 1
+        }else{
+            newSliderNumber = slideNumber === 5 ? 0 : slideNumber + 1
+        }
+
+        setSlideNumber(newSliderNumber)
+    }
+
+   
+    
     return(
         <div>
             <Navbar/>
             <Header type="list"/>
             <div className="hotelContainer">
+                {open && <div className="slider">
+                    <FontAwesomeIcon icon={faCircleXmark} className="close" onClick={()=> setOpen(false)} 
+                     />    
+                    <FontAwesomeIcon icon={faCircleArrowLeft} className="arrow" onClick={()=> handleMove("left")}/> 
+                    <div className="sliderWrapper">
+                        <img src={photos[slideNumber].src} alt="" className="sliderImg"/>
+                    </div>   
+                    <FontAwesomeIcon icon={faCircleArrowRight} className="arrow" onClick={()=> handleMove("right")}/>    
+                </div>}
                 <div className="hotelWrapper">
+                    <button className="bookNow">Reserve</button>
                     <h1 className="hotelTitle">Grand Hotel</h1>
                     <div className="hotelAddress">
                          <FontAwesomeIcon icon={faLocationDot}/>
@@ -58,9 +94,9 @@ const Hotel = () =>{
                     </span>
 
                     <div className="hotelImges">
-                        {photos.map((item: any) =>(
+                        {photos.map((photo: any, i:any) =>(
                             <div className="hotelImgesWrapper">
-                                <img src={item.src} alt="" className="hotelImg"/>    
+                                <img onClick={()=>handleOpen(i)} src={photo.src} alt="" className="hotelImg"/>    
                             </div>
                         ))}
                     </div>
@@ -95,7 +131,8 @@ const Hotel = () =>{
                         </div>
                     </div>
                 </div>
-                
+                <MailList/>
+                <Footer/>
             </div>
         </div>
     )
