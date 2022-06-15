@@ -1,4 +1,4 @@
-/* .reserve {
+.reserve {
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.418);
@@ -64,6 +64,11 @@
     display: flex;
     flex-direction: column;
   }
+
+  .room>label{
+    font-size: 14px;
+  }
+
   
   .rButton {
     border: none;
@@ -75,4 +80,4 @@
     border-radius: 5px;
     width: 100%;
     margin-top: 20px;
-  } */
+  }
