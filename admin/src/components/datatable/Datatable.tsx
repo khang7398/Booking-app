@@ -1,16 +1,28 @@
-import "./datatable.css";
+import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { userColumns, userRows } from "../../datatablesource";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import useFetch from "../../hooks/useFetch";
+import axios from "axios";
 
-const Datatable = () => {
-    const [data, setData] = useState(userRows);
+const Datatable = ({ columns }: any) => {
+    const [list, setList] = useState<any>("")
+    const location = useLocation();
+    const path = location.pathname.split("/")[1];
+    const { data, loading, error } = useFetch(`/${path}`)
 
-    const handleDelete = (id: any) => {
-        setData(data.filter((item: any) => item.id !== id));
+    const handleDelete = async (id: any) => {
+        try {
+            await axios.delete(`/${path}/${id}`);
+            setList(list.filter((item: any) => item._id !== id));
+        } catch (err) { }
     };
 
+
+    useEffect(() => {
+        setList(data)
+    }, [data])
     const actionColumn = [
         {
             field: "action",
@@ -24,7 +36,7 @@ const Datatable = () => {
                         </Link>
                         <div
                             className="deleteButton"
-                            onClick={() => handleDelete(params.row.id)}
+                            onClick={() => handleDelete(params.row._id)}
                         >
                             Delete
                         </div>
@@ -43,11 +55,12 @@ const Datatable = () => {
             </div>
             <DataGrid
                 className="datagrid"
-                rows={data}
+                rows={list}
                 columns={userColumns.concat(actionColumn)}
                 pageSize={9}
                 rowsPerPageOptions={[9]}
                 checkboxSelection
+                getRowId={(row: any) => row._id}
             />
         </div>
     );

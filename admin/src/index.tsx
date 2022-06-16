@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import { AuthContextProvider } from './context/authContext';
 import { DarkModeContextProvider } from './context/darkModeContext';
 
 
@@ -9,9 +10,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <DarkModeContextProvider>
-      <App />
-    </DarkModeContextProvider>
+    <AuthContextProvider>
+      <DarkModeContextProvider>
+        <App />
+      </DarkModeContextProvider>
+    </AuthContextProvider>
   </React.StrictMode>,
 );
 
