@@ -1,47 +1,11 @@
-import "./new.scss";
+import "./newRoom.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
-import axios from "axios";
 
-const New = ({ inputs, title }: any) => {
+const NewRoom = ({ inputs, title }: any) => {
     const [file, setFile] = useState<any>("");
-    const [info, setInfo] = useState({})
-
-    const handleChange = (e: any) => {
-        setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }))
-    }
-
-    const handleClick = async (e: any) => {
-        e.preventDefault();
-        const data = new FormData();
-        data.append("file", file);
-        data.append("upload_preset", "upload");
-        try {
-            const uploadRes = await axios.post(
-                "https://api.cloudinary.com/v1_1/uehv/image/upload", data
-            );
-
-            console.log(uploadRes)
-
-
-
-            // const { url } = uploadRes.data;
-
-            // const newUser = {
-            //     ...info,
-            //     img: url,
-            // };
-
-            // await axios.post("/auth/register", newUser);
-        } catch (err) {
-        }
-    }
-
-    const handleImageUpload = (e: any) => {
-        setFile(e.target.files[0])
-    }
 
     return (
         <div className="new">
@@ -71,7 +35,7 @@ const New = ({ inputs, title }: any) => {
                                 <input
                                     type="file"
                                     id="file"
-                                    onChange={handleImageUpload}
+                                    onChange={(e) => setFile(e.target.files)}
                                     style={{ display: "none" }}
                                 />
                             </div>
@@ -79,13 +43,10 @@ const New = ({ inputs, title }: any) => {
                             {inputs.map((input: any) => (
                                 <div className="formInput" key={input.id}>
                                     <label>{input.label}</label>
-                                    <input onChange={handleChange}
-                                        type={input.type}
-                                        placeholder={input.placeholder}
-                                        id={input.id} />
+                                    <input type={input.type} placeholder={input.placeholder} />
                                 </div>
                             ))}
-                            <button onClick={handleClick}>Send</button>
+                            <button>Send</button>
                         </form>
                     </div>
                 </div>
@@ -94,4 +55,4 @@ const New = ({ inputs, title }: any) => {
     );
 };
 
-export default New;
+export default NewRoom;
