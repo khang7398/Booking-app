@@ -39,6 +39,8 @@ const Header = ({ type }: any) => {
         })
     }
 
+
+
     const { dispatch } = useContext<any>(SearchContext)
 
     const handleSearch = () => {

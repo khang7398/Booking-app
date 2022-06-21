@@ -7,10 +7,14 @@ import axios from "axios";
 
 const New = ({ inputs, title }: any) => {
     const [file, setFile] = useState<any>("");
-    const [info, setInfo] = useState({})
+    const [info, setInfo] = useState({});
 
     const handleChange = (e: any) => {
-        setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }))
+        setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    };
+
+    const handleUpload = (e: any) => {
+        setFile(e.target.files[0])
     }
 
     const handleClick = async (e: any) => {
@@ -20,29 +24,24 @@ const New = ({ inputs, title }: any) => {
         data.append("upload_preset", "upload");
         try {
             const uploadRes = await axios.post(
-                "https://api.cloudinary.com/v1_1/uehv/image/upload", data
+                "https://api.cloudinary.com/v1_1/UEHV/image/upload",
+                data
             );
 
-            console.log(uploadRes)
+            const { url } = uploadRes.data;
 
+            const newUser = {
+                ...info,
+                img: url,
+            };
 
-
-            // const { url } = uploadRes.data;
-
-            // const newUser = {
-            //     ...info,
-            //     img: url,
-            // };
-
-            // await axios.post("/auth/register", newUser);
+            await axios.post("/auth/register", newUser);
         } catch (err) {
+            console.log(err);
         }
-    }
+    };
 
-    const handleImageUpload = (e: any) => {
-        setFile(e.target.files[0])
-    }
-
+    console.log(info);
     return (
         <div className="new">
             <Sidebar />
@@ -71,7 +70,7 @@ const New = ({ inputs, title }: any) => {
                                 <input
                                     type="file"
                                     id="file"
-                                    onChange={handleImageUpload}
+                                    onChange={handleUpload}
                                     style={{ display: "none" }}
                                 />
                             </div>
@@ -79,10 +78,12 @@ const New = ({ inputs, title }: any) => {
                             {inputs.map((input: any) => (
                                 <div className="formInput" key={input.id}>
                                     <label>{input.label}</label>
-                                    <input onChange={handleChange}
+                                    <input
+                                        onChange={handleChange}
                                         type={input.type}
                                         placeholder={input.placeholder}
-                                        id={input.id} />
+                                        id={input.id}
+                                    />
                                 </div>
                             ))}
                             <button onClick={handleClick}>Send</button>
