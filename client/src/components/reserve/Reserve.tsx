@@ -59,6 +59,7 @@ const Reserve = ({ setOpen, hotelId }: any) => {
 
 
 
+
     return (
         <div className="reserve">
             <div className="rContainer">

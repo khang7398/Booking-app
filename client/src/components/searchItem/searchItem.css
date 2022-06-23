@@ -9,9 +9,9 @@
   }
   
   .siImg {
-    width: 200px;
-    height: 200px;
-    margin-top: auto;
+    width: 250px;
+    height: 250px;
+    margin-top: 18px;
     object-fit: cover;
   }
   
@@ -32,7 +32,7 @@
   }
   
   .siTaxiOp {
-    font-size: 12px;
+    font-size: 18px;
     background-color: #008009;
     color: white;
     width: max-content;
@@ -41,12 +41,19 @@
   }
   
   .siSubtitle{
-    font-size: 12px;
+    font-size: 18px;
     font-weight: bold;
   }
   
   .siFeatures{
-    font-size: 12px;
+    font-size: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 25px;
+    -webkit-line-clamp: 3;
+    height: 75px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
   }
   
   .siCancelOp{

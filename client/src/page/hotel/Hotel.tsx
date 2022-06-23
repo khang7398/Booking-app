@@ -1,20 +1,22 @@
-import { faCircleArrowLeft, faCircleArrowRight, faCircleXmark, faLocationDot } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import "../hotel/hotel.css"
-import Footer from "../../components/footer/Footer"
-import Header from "../../components/header/Header"
-import MailList from "../../components/mailList/mailList"
-import Navbar from "../../components/navbar/Navbar"
-import { useContext, useState } from "react"
-import useFetch from "../../components/hook/useFetch"
-import { useLocation, useNavigate } from "react-router-dom"
-import { SearchContext } from "../../context/searchContext"
-import { AuthContext } from "../../context/authContext"
-import Reserve from "../../components/reserve/Reserve"
+import "./hotel.css";
+import Navbar from "../../components/navbar/Navbar";
+import Header from "../../components/header/Header";
+import MailList from "../../components/mailList/mailList";
+import Footer from "../../components/footer/Footer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faCircleArrowLeft,
+    faCircleArrowRight,
+    faCircleXmark,
+    faLocationDot,
+} from "@fortawesome/free-solid-svg-icons";
+import { useContext, useState } from "react";
 
-
-
-
+import { useLocation, useNavigate } from "react-router-dom";
+import { SearchContext } from "../../context/searchContext";
+import { AuthContext } from "../../context/authContext";
+import Reserve from "../../components/reserve/Reserve";
+import useFetch from "../../components/hook/useFetch";
 
 const Hotel = () => {
     const location = useLocation();
@@ -35,8 +37,6 @@ const Hotel = () => {
         const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
         return diffDays;
     }
-
-
 
     const days = dayDifference(dates[0].endDate, dates[0].startDate);
 
@@ -150,6 +150,6 @@ const Hotel = () => {
             {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
         </div>
     );
-}
+};
 
-export default Hotel
+export default Hotel;

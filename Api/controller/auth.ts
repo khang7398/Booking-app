@@ -5,20 +5,21 @@ import User from "../models/User"
 import { createError } from "../utils/error";
 
 export const register = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    try{
-        const salt = bcrypt.genSaltSync(10);
-        const hash = bcrypt.hashSync(req.body.password, salt);
-        const newUser =  new User({
-            ...req.body,
-            password:hash,
-        })
-        await newUser.save()
-        res.status(200).json("user has been created")
+    try {
+      const salt = bcrypt.genSaltSync(10);
+      const hash = bcrypt.hashSync(req.body.password, salt);
+  
+      const newUser = new User({
+        ...req.body,
+        password: hash,
+      });
+  
+      await newUser.save();
+      res.status(200).send("User has been created.");
+    } catch (err) {
+      next(err);
     }
-    catch(err){
-        next(err)
-    }
-}
+  };
 
 export const login = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     try{

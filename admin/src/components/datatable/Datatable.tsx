@@ -48,8 +48,8 @@ const Datatable = ({ columns }: any) => {
     return (
         <div className="datatable">
             <div className="datatableTitle">
-                Add New User
-                <Link to="/users/new" className="link">
+                {path}
+                <Link to={`/${path}/new`} className="link">
                     Add New
                 </Link>
             </div>
@@ -60,7 +60,7 @@ const Datatable = ({ columns }: any) => {
                 pageSize={9}
                 rowsPerPageOptions={[9]}
                 checkboxSelection
-                getRowId={(row: any) => row._id}
+                getRowId={(row) => row._id}
             />
         </div>
     );
