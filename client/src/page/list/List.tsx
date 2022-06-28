@@ -8,23 +8,35 @@ import { DateRange } from "react-date-range"
 import SearchItem from "../../components/searchItem/searchItem"
 import useFetch from "../../components/hook/useFetch"
 
+interface State {
+    min: Number,
+    max: Number,
+}
+
 const List = () => {
     const location: any = useLocation()
-
     const [destination, setDestination] = useState(location.state.destination)
     const [dates, setDates] = useState(location.state.dates);
     const [openDate, setOpenDate] = useState(false)
     const [options, setOptions] = useState(location.state.options)
-    const [min, setMin] = useState<any>(undefined);
-    const [max, setMax] = useState<any>(undefined);
+    const [min, setMin] = useState<State | string | undefined>(undefined);
+    const [max, setMax] = useState<State | string | undefined>(undefined);
     const { data, loading, error, reFetch } = useFetch(`/hotels?city=${destination}&min=${min || 0}&max=${max || 9999}`)
-
-
 
 
     const handleClick = () => {
         reFetch()
     }
+
+    const handleChangeMin = (e: react.ChangeEvent<HTMLInputElement>) => {
+        setMin(e.target.value)
+    }
+
+    const handleChangeMax = (e: react.ChangeEvent<HTMLInputElement>) => {
+        setMax(e.target.value)
+    }
+
+
     return (
         <div>
             <Navbar />
@@ -60,7 +72,7 @@ const List = () => {
                                     </span>
                                     <input
                                         type="number"
-                                        onChange={(e) => setMin(e.target.value)}
+                                        onChange={handleChangeMin}
                                         className="lsOptionInput"
                                     />
                                 </div>
@@ -70,7 +82,7 @@ const List = () => {
                                     </span>
                                     <input
                                         type="number"
-                                        onChange={(e) => setMax(e.target.value)}
+                                        onChange={handleChangeMax}
                                         className="lsOptionInput"
                                     />
                                 </div>

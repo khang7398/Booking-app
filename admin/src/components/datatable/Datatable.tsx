@@ -12,7 +12,7 @@ const Datatable = ({ columns }: any) => {
     const path = location.pathname.split("/")[1];
     const { data, loading, error } = useFetch(`/${path}`)
 
-    const handleDelete = async (id: any) => {
+    const handleDelete = async (id: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         try {
             await axios.delete(`/${path}/${id}`);
             setList(list.filter((item: any) => item._id !== id));

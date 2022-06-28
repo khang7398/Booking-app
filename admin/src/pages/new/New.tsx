@@ -4,10 +4,13 @@ import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const New = ({ inputs, title }: any) => {
     const [file, setFile] = useState<any>("");
     const [info, setInfo] = useState({});
+
+    const negative = useNavigate()
 
     const handleChange = (e: any) => {
         setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -40,6 +43,8 @@ const New = ({ inputs, title }: any) => {
         } catch (err) {
             console.log(err)
         }
+
+        negative("/users")
     };
 
     console.log(info)

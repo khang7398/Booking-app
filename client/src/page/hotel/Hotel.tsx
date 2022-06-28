@@ -95,6 +95,8 @@ const Hotel = () => {
                                 icon={faCircleArrowRight}
                                 className="arrow"
                                 onClick={() => handleMove("r")}
+
+
                             />
                         </div>
                     )}

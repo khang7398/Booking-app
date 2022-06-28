@@ -5,7 +5,7 @@ const Featured = () => {
 
     const { data, loading, error } = useFetch("/hotels/countByCity?cities=phu cuoc,nha trang,da lat")
 
-    console.log(data[2])
+
     return (
         <div className="featured">
             {loading ? ("loading please wait")

@@ -24,8 +24,8 @@ const FeaturedProperties = () => {
                                 }
                             </div>
                         ))}
-
-                    </>)}
+                    </>
+                )}
         </div>
     )
 }

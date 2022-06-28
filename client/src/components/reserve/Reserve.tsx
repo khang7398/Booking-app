@@ -13,6 +13,7 @@ const Reserve = ({ setOpen, hotelId }: any) => {
     const [selectRooms, setSelectRooms] = useState<any>([])
     const { dates } = useContext<any>(SearchContext)
 
+    console.log(data)
 
     const navigate = useNavigate()
 
