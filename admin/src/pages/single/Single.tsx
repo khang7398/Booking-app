@@ -3,8 +3,28 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import Chart from "../../components/chart/Chart";
 import List from "../../components/table/Table";
+import useFetch from "../../hooks/useFetch";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
+
+interface Idata {
+    id: Number,
+    username: String,
+    email: String,
+    phone: String,
+    country: String
+    city: String,
+}
+
 
 const Single = () => {
+    const location = useLocation()
+    const id = location.pathname.split("/users/")[1]
+    const { data, loading, error } = useFetch(`/users/`)
+
+
+
     return (
         <div className="single">
             <Sidebar />
@@ -21,25 +41,30 @@ const Single = () => {
                                 className="itemImg"
                             />
                             <div className="details">
-                                <h1 className="itemTitle">Jane Doe</h1>
-                                <div className="detailItem">
-                                    <span className="itemKey">Email:</span>
-                                    <span className="itemValue">janedoe@gmail.com</span>
-                                </div>
-                                <div className="detailItem">
-                                    <span className="itemKey">Phone:</span>
-                                    <span className="itemValue">+1 2345 67 89</span>
-                                </div>
-                                <div className="detailItem">
-                                    <span className="itemKey">Address:</span>
-                                    <span className="itemValue">
-                                        Elton St. 234 Garden Yd. NewYork
-                                    </span>
-                                </div>
-                                <div className="detailItem">
-                                    <span className="itemKey">Country:</span>
-                                    <span className="itemValue">USA</span>
-                                </div>
+                                {data.map((item: any) => (
+                                    <>
+                                        <h1 className="itemTitle">{item.username}</h1>
+                                        <div className="detailItem">
+                                            <span className="itemKey">Email:</span>
+                                            <span className="itemValue">{item.email}</span>
+                                        </div>
+                                        <div className="detailItem">
+                                            <span className="itemKey">Phone:</span>
+                                            <span className="itemValue">{item.phone}</span>
+                                        </div>
+                                        <div className="detailItem">
+                                            <span className="itemKey">Address:</span>
+                                            <span className="itemValue">
+                                                {item.city}
+                                            </span>
+                                        </div>
+                                        <div className="detailItem">
+                                            <span className="itemKey">Country:</span>
+                                            <span className="itemValue">{item.country}</span>
+                                        </div>
+                                    </>
+                                ))}
+
                             </div>
                         </div>
                     </div>

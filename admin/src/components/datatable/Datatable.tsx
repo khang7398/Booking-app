@@ -1,16 +1,22 @@
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns } from "../../datatablesource";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
+import Single from "../../pages/single/Single";
+
+
+
 
 const Datatable = ({ columns }: any) => {
     const [list, setList] = useState<any>("")
     const location = useLocation();
     const path = location.pathname.split("/")[1];
     const { data, loading, error } = useFetch(`/${path}`)
+    const [dataView, setDataView] = useState([""])
+
+    const navigate = useNavigate()
 
     const handleDelete = async (id: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         try {
@@ -18,6 +24,14 @@ const Datatable = ({ columns }: any) => {
             setList(list.filter((item: any) => item._id !== id));
         } catch (err) { }
     };
+
+    const handleView = async (id: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        try {
+            const res = await axios.get(`/${path}/${id}`)
+            setDataView(res.data)
+            navigate(`/users/${id}`)
+        } catch (err) { }
+    }
 
 
     useEffect(() => {
@@ -31,9 +45,18 @@ const Datatable = ({ columns }: any) => {
             renderCell: (params: any) => {
                 return (
                     <div className="cellAction">
-                        <Link to="/users/test" style={{ textDecoration: "none" }}>
-                            <div className="viewButton">View</div>
-                        </Link>
+                        {/* <Link to="/users/test" style={{ textDecoration: "none" }}>
+                            <div className="viewButton"
+                                onClick={() => handleView(params.row._id)}
+                            >
+                                View
+                            </div>
+                        </Link> */}
+                        <div className="viewButton"
+                            onClick={() => handleView(params.row._id)}
+                        >
+                            View
+                        </div>
                         <div
                             className="deleteButton"
                             onClick={() => handleDelete(params.row._id)}
@@ -45,6 +68,7 @@ const Datatable = ({ columns }: any) => {
             },
         },
     ];
+
     return (
         <div className="datatable">
             <div className="datatableTitle">
@@ -62,6 +86,7 @@ const Datatable = ({ columns }: any) => {
                 checkboxSelection
                 getRowId={(row) => row._id}
             />
+            <Single />
         </div>
     );
 };
