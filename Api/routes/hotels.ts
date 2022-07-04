@@ -18,6 +18,7 @@ router.get("/find/:id" , findHotel)
 
 //GET ALL
 router.get("/" , findAllHotel)
+
 router.get("/countByCity" , countByCity)
 router.get("/countByType" , countByType)
 router.get("/room/:id" , getHotelRooms)

@@ -29,7 +29,7 @@ const Datatable = ({ columns }: any) => {
         try {
             const res = await axios.get(`/${path}/${id}`)
             setDataView(res.data)
-            navigate(`/users/${id}`)
+            navigate(`/${path}/${id}`)
         } catch (err) { }
     }
 
@@ -45,13 +45,7 @@ const Datatable = ({ columns }: any) => {
             renderCell: (params: any) => {
                 return (
                     <div className="cellAction">
-                        {/* <Link to="/users/test" style={{ textDecoration: "none" }}>
-                            <div className="viewButton"
-                                onClick={() => handleView(params.row._id)}
-                            >
-                                View
-                            </div>
-                        </Link> */}
+
                         <div className="viewButton"
                             onClick={() => handleView(params.row._id)}
                         >
@@ -86,7 +80,6 @@ const Datatable = ({ columns }: any) => {
                 checkboxSelection
                 getRowId={(row) => row._id}
             />
-            <Single />
         </div>
     );
 };
