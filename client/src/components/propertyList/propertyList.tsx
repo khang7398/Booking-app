@@ -22,15 +22,16 @@ const PropertyList = () => {
     <div className="pList">
       {loading ? ("loading") : (
         <>
-          {data && images.map((item, index) => (
 
+          {data && images.map((item, index) => (
             <div className="pListItem" key={index}>
               <img src={item} alt="" className="pListImg" />
               <div className="pListTitle">
                 <h1>{data[index]?.type}</h1>
                 <h2>{data[index]?.count} {data[index]?.type}</h2>
               </div>
-            </div>))}
+            </div>
+          ))}
         </>
       )}
     </div>

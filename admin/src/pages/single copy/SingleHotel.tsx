@@ -1,7 +1,6 @@
-import "./single.scss";
+import "./singleHotel.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import Chart from "../../components/chart/Chart";
 import List from "../../components/table/Table";
 import { DetailedHTMLProps, ImgHTMLAttributes, useEffect, useState } from "react";
 import axios from "axios";
@@ -9,28 +8,26 @@ import { useLocation } from "react-router-dom";
 
 interface IData {
     id: Number;
-    username: String;
-    email: String;
-    phone: String;
-    country: String;
+    address: String;
     city: String;
-    img: any;
+    name: String;
+    photos: any;
+    desc: String;
+    distance: String;
     src: DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>;
 }
 
 
-const Single = () => {
+const SingleHotel = () => {
     const location = useLocation()
-    const path = location.pathname.split("/")[1]
-    const id = location.pathname.split(`/${path}`)[1]
+    const id = location.pathname.split(`/hotels`)[1]
     const [data, setData] = useState<IData>([] as any);
 
-    console.log(data)
 
     useEffect(() => {
 
         const fetching = async () => {
-            const res = await axios.get(`/${path}/${id}`)
+            const res = await axios.get(`/hotels/${id}`)
             const dataUser = res.data
             setData(dataUser)
         }
@@ -51,36 +48,28 @@ const Single = () => {
                         <div className="editButton">Edit</div>
                         <h1 className="title">Information</h1>
                         <div className="item">
-                            <img
-                                src={data.img}
-                                alt="image user"
-                                className="itemImg"
-                            />
                             <div className="details">
-                                <h1 className="itemTitle">{data.username}</h1>
+                                <h1 className="itemTitle">{data.name}</h1>
                                 <div className="detailItem">
-                                    <span className="itemKey">Email:</span>
-                                    <span className="itemValue">{data.email}</span>
+                                    <span className="itemKey">address:</span>
+                                    <span className="itemValue">{data.address}</span>
                                 </div>
                                 <div className="detailItem">
-                                    <span className="itemKey">Phone:</span>
-                                    <span className="itemValue">{data.phone}</span>
+                                    <span className="itemKey">city:</span>
+                                    <span className="itemValue">{data.city}</span>
                                 </div>
                                 <div className="detailItem">
-                                    <span className="itemKey">Address:</span>
+                                    <span className="itemKey">desc:</span>
                                     <span className="itemValue">
-                                        {data.city}
+                                        {data.desc}
                                     </span>
                                 </div>
                                 <div className="detailItem">
-                                    <span className="itemKey">Country:</span>
-                                    <span className="itemValue">{data.country}</span>
+                                    <span className="itemKey">Distance:</span>
+                                    <span className="itemValue">{data.distance}</span>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="right">
-                        <Chart aspect={3 / 1} title="User Spending ( Last 6 Months)" />
                     </div>
                 </div>
                 <div className="bottom">
@@ -92,4 +81,4 @@ const Single = () => {
     );
 };
 
-export default Single;
+export default SingleHotel;
