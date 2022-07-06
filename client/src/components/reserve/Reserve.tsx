@@ -32,8 +32,10 @@ const Reserve = ({ setOpen, hotelId }: any) => {
 
         return dates;
     };
+
     const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate)
     const isAvailable = (roomNumber: any) => {
+
         const isFound = roomNumber.unavailableDates.some((date: any) =>
             alldates.includes(new Date(date).getTime())
         );
@@ -57,9 +59,6 @@ const Reserve = ({ setOpen, hotelId }: any) => {
             navigate("/")
         } catch (err) { }
     }
-
-
-
 
     return (
         <div className="reserve">

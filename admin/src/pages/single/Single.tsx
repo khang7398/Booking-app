@@ -3,7 +3,6 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import Chart from "../../components/chart/Chart";
 import List from "../../components/table/Table";
-import useFetch from "../../hooks/useFetch";
 import { DetailedHTMLProps, ImgHTMLAttributes, useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
@@ -23,7 +22,7 @@ interface IData {
 const Single = () => {
     const location = useLocation()
     const id = location.pathname.split("/users/")[1]
-    const [data, setData] = useState<any>([]);
+    const [data, setData] = useState<IData>([] as any);
 
 
     useEffect(() => {
