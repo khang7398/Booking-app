@@ -13,7 +13,7 @@ router.put("/:id" , verifyUser, updateUser)
 router.delete("/:id" ,verifyUser, deleteUser)
 
 //GET
-router.get("/:id" ,verifyUser, findUser)
+router.get("/find/:id" ,verifyUser, findUser)
 
 //GET ALL
 router.get("/" ,verifyAdmin,  findAllUser)

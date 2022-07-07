@@ -25,12 +25,11 @@ const Single = () => {
     const id = location.pathname.split(`/${path}`)[1]
     const [data, setData] = useState<IData>([] as any);
 
-    console.log(data)
 
     useEffect(() => {
 
         const fetching = async () => {
-            const res = await axios.get(`/${path}/${id}`)
+            const res = await axios.get(`/${path}/find/${id}`)
             const dataUser = res.data
             setData(dataUser)
         }

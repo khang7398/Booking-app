@@ -27,7 +27,7 @@ const SingleHotel = () => {
     useEffect(() => {
 
         const fetching = async () => {
-            const res = await axios.get(`/hotels/${id}`)
+            const res = await axios.get(`/hotels/find/${id}`)
             const dataUser = res.data
             setData(dataUser)
         }

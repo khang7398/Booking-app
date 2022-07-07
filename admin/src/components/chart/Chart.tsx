@@ -11,11 +11,13 @@ import {
 const data = [
 
     { name: "January", Total: 1200 },
-    { name: "February", Total: 2100 },
+    { name: "February", Total: 3000 },
     { name: "March", Total: 800 },
     { name: "April", Total: 1600 },
     { name: "May", Total: 900 },
     { name: "June", Total: 1700 },
+
+
 
 ];
 
@@ -25,8 +27,8 @@ const Chart = ({ aspect, title }: any) => {
             <div className="title">{title}</div>
             <ResponsiveContainer width="100%" aspect={aspect}>
                 <AreaChart
-                    width={730}
-                    height={250}
+                    width={930}
+                    height={500}
                     data={data}
                     margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
                 >

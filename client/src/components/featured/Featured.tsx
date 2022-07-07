@@ -3,7 +3,7 @@ import "../featured/featured.css"
 import useFetch from "../hook/useFetch";
 const Featured = () => {
 
-    const { data, loading, error } = useFetch("/hotels/countByCity?cities=phu cuoc,nha trang,da lat")
+    const { data, loading, error } = useFetch("/hotels/countByCity?cities=phu quoc,nha trang,da lat")
 
 
     return (
@@ -14,7 +14,7 @@ const Featured = () => {
                         <div className="featuredItem">
                             <img src="https://cf.bstatic.com/xdata/images/city/max500/690334.webp?k=b99df435f06a15a1568ddd5f55d239507c0156985577681ab91274f917af6dbb&o=" alt="" className="featuredImg" />
                             <div className="featuredTitle">
-                                <h1>phu cuoc</h1>
+                                <h1>phu quoc</h1>
                                 <h2>{data[0]} properties</h2>
                             </div>
                         </div>

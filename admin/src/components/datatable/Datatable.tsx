@@ -12,7 +12,7 @@ import axios from "axios";
 const Datatable = ({ columns }: any) => {
     const [list, setList] = useState<any>("")
     const location = useLocation();
-    const path = location.pathname.split("/")[1];
+    const path: any = location.pathname.split("/")[1];
     const { data, loading, error } = useFetch(`/${path}`)
     const [dataView, setDataView] = useState([""])
 
@@ -26,11 +26,14 @@ const Datatable = ({ columns }: any) => {
     };
 
     const handleView = async (id: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+
         try {
-            const res = await axios.get(`/${path}/${id}`)
+            const res = await axios.get(`/${path}/find/${id}`)
             setDataView(res.data)
             navigate(`/${path}/${id}`)
         } catch (err) { }
+
+
     }
 
 
