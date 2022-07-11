@@ -7,23 +7,14 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import { DarkModeContext } from "../../context/darkModeContext";
-import { useContext, useState } from "react";
-import axios from "axios";
+import { useContext } from "react";
 
 const Navbar = () => {
     const { dispatch } = useContext<any>(DarkModeContext);
-    const [location, setLocation] = useState('');
-
-
 
     return (
         <div className="navbar">
             <div className="wrapper">
-
-                <div className="search">
-                    <input type="text" placeholder="Search..." />
-                    <SearchOutlinedIcon />
-                </div>
 
                 <div className="items">
 

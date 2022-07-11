@@ -12,7 +12,7 @@ import { AuthContext } from "./context/authContext";
 import { hotelColumns, roomColumns, userColumns } from "./datatablesource";
 import NewHotel from "./pages/newHotel/newHotel";
 import NewRoom from "./pages/newRoom/newRoom";
-import SingleHotel from "./pages/single copy/SingleHotel";
+import SingleHotel from "./pages/singleHotel/SingleHotel";
 
 
 function App() {

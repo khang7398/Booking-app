@@ -1,20 +1,18 @@
 import "./datatable.scss";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { DataGrid } from "@mui/x-data-grid";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
 
-
-
-
-
 const Datatable = ({ columns }: any) => {
-    const [list, setList] = useState<any>("")
+    const [list, setList] = useState<any[]>([])
     const location = useLocation();
     const path: any = location.pathname.split("/")[1];
     const { data, loading, error } = useFetch(`/${path}`)
-    const [dataView, setDataView] = useState([""])
+    const [Searchcity, setSearchcity] = useState<any>("")
+
 
     const navigate = useNavigate()
 
@@ -26,20 +24,18 @@ const Datatable = ({ columns }: any) => {
     };
 
     const handleView = async (id: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-
         try {
             const res = await axios.get(`/${path}/find/${id}`)
-            setDataView(res.data)
             navigate(`/${path}/${id}`)
         } catch (err) { }
-
-
     }
+
 
 
     useEffect(() => {
         setList(data)
     }, [data])
+
     const actionColumn = [
         {
             field: "action",
@@ -68,15 +64,26 @@ const Datatable = ({ columns }: any) => {
 
     return (
         <div className="datatable">
+
             <div className="datatableTitle">
+
                 {path}
+                <div className="search">
+                    <input type="text" placeholder="Search..."
+                        onChange={(e) => setSearchcity(e.target.value)} />
+                    <SearchOutlinedIcon />
+                </div>
+
                 <Link to={`/${path}/new`} className="link">
                     Add New
                 </Link>
             </div>
             <DataGrid
                 className="datagrid"
-                rows={list}
+                rows={
+                    list.filter((item: any) => item.city && item.city.toLowerCase().includes(Searchcity) ||
+                        item.title && item.title.toLowerCase().includes(Searchcity))
+                }
                 columns={columns.concat(actionColumn)}
                 pageSize={9}
                 rowsPerPageOptions={[9]}
