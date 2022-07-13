@@ -81,8 +81,11 @@ const Datatable = ({ columns }: any) => {
             <DataGrid
                 className="datagrid"
                 rows={
-                    list.filter((item: any) => item.city && item.city.toLowerCase().includes(Searchcity) ||
-                        item.title && item.title.toLowerCase().includes(Searchcity))
+                    list.filter((item: any) => 
+                        item.city && item.city.toLowerCase().includes(Searchcity) ||
+                        item.title && item.title.toLowerCase().includes(Searchcity) ||
+                        item.username && item.username.toLowerCase().includes(Searchcity)
+                    )
                 }
                 columns={columns.concat(actionColumn)}
                 pageSize={9}
